@@ -1,0 +1,52 @@
+name: Motor Controller CI
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build: 
+    strategy:
+      matrix:
+        compiler: [g++, clang++]
+        build_type: [Debug, Release]
+
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.compiler }}-${{ matrix.build_type }}
+      cancel-in-progress: true
+    
+    steps:
+    - name: Checkout Motor Controller
+      uses: actions/checkout@v4
+    
+    - name: Install ccache
+      run: |
+        sudo apt-get update 
+        sudo apt-get install -y ccache ${{ matrix.compiler == 'clang++' && 'clang' || '' }}
+    
+    - name: Load cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ccache
+        key: ccache-${{ runner.os }}-${{ github.sha }}
+        restore-keys: |
+          ccache-${{ runner.os }}-
+    
+    - name: Make build folder
+      run: cmake -B build -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER=${{ matrix.compiler }} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+    
+    - name: Compile Firmware
+      run: cmake --build build
+
+    - name: Run Tests
+      run: ctest --test-dir build --output-on-failure
+
+    - name: Run Firmware
+      run: ./build/motorcontroller_app
