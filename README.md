@@ -11,3 +11,10 @@ cmake -B build
 cmake --build build
 ./build/motorcontroller_app
 ```
+## AI Policy
+
+A.I. is both allowed and encouraged but
+only responsibly. We do prefer handwritten 
+code for its educational value and suggest 
+LLM's be used as sanity checkers. Quality code 
+is non-negotiable, either way.
