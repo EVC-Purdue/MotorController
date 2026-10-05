@@ -32,11 +32,25 @@ add_library(mc_port_host_stub
     firmware/port/src/host_stub.cpp
 )
 
+add_library(mc_hal
+    firmware/hal/src/adc.cpp
+    firmware/hal/src/comp.cpp
+    firmware/hal/src/hall.cpp
+    firmware/hal/src/iwdg.cpp
+    firmware/hal/src/opamp.cpp
+    firmware/hal/src/pll.cpp
+    firmware/hal/src/pwm.cpp
+    firmware/hal/src/time.cpp
+    firmware/hal/src/uart.cpp
+)
+
 target_include_directories(mc_core PUBLIC firmware/core/include)
 target_include_directories(mc_port_host_stub PUBLIC firmware/port/include)
+target_include_directories(mc_hal PUBLIC firmware/hal/include)
 target_link_libraries(mc_port_host_stub PUBLIC mc_core)
 target_compile_options(mc_core PRIVATE ${MC_WARNING_FLAGS})
 target_compile_options(mc_port_host_stub PRIVATE ${MC_WARNING_FLAGS})
+target_compile_options(mc_hal PRIVATE ${MC_WARNING_FLAGS})
 
 add_executable(motorcontroller_app firmware/main.cpp)
 target_link_libraries(motorcontroller_app PRIVATE mc_core mc_port_host_stub)
