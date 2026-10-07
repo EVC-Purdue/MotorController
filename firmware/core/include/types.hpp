@@ -23,9 +23,9 @@ typedef enum {
 } FaultCode;
 
 typedef enum {
-  MOTOR_STATE_STOPPED,
-  MOTOR_STATE_RUNNING,
-  MOTOR_STATE_FAULTED
+  MOTOR_STOPPED,
+  MOTOR_RUNNING,
+  MOTOR_FAULTED
 } MotorState;
 
 typedef struct {
