@@ -7,7 +7,7 @@ enum Direction {
 
 enum FaultCode {
   FAULT_NONE,
-  FAULT_OVER_CURRENT,
+  FAULT_OVER_CURRENT, ❯ git checkout main
   FAULT_OVER_VOLTAGE,
   FAULT_UNDER_VOLTAGE,
   FAULT_OVERHEATING,
