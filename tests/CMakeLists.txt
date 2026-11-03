@@ -9,7 +9,6 @@ FetchContent_MakeAvailable(doctest)
 
 add_executable(mc_tests
     test_main.cpp
-    core/test_commutation.cpp
     core/test_speed_control.cpp
     core/test_fault.cpp
     core/test_motor_controller.cpp

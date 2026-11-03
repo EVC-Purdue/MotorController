@@ -1,10 +1,5 @@
 #pragma once
 #include "types.hpp"
+#include <cstdint>
 
-typedef struct {
-    CommutationStep step;
-    Direction direction;
-} CommutationState;
-
-CommutationPattern commutation_pattern_for_step(CommutationStep step);
-CommutationStep commutation_update(CommutationState* state, uint8_t hall_code);
+CommutationStep commutation_update(CommutationStep* state, uint8_t hall_code);
