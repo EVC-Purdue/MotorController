@@ -6,7 +6,7 @@
 
 struct MotorController {
     MotorState state;
-    CommutationState commutation;
+    CommutationStep commutation;
     SpeedControllerState speed_controller;
     FaultLimits fault_limits;
     float target_speed;
