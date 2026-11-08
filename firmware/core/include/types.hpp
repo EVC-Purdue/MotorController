@@ -1,4 +1,6 @@
 #pragma once
+#include <stddef.h>
+#include "macros.hpp"
 
 enum Direction { 
   DIRECTION_FORWARD,
@@ -26,12 +28,6 @@ enum PhaseDrive {
   PHASE_HIGH,
 };
 
-struct PhaseState {
-  PhaseDrive phase_a;
-  PhaseDrive phase_b;
-  PhaseDrive phase_c;
-};
-
 enum CommutationStep {
   COMMUTATION_STEP_0,
   COMMUTATION_STEP_1,
@@ -42,6 +38,12 @@ enum CommutationStep {
   COMMUTATION_STEP_COUNT
 };
 
+struct PhaseState {
+  PhaseDrive phase_a;
+  PhaseDrive phase_b;
+  PhaseDrive phase_c;
+};
+
 constexpr PhaseState commutation_pattern[COMMUTATION_STEP_COUNT] = {
   { PHASE_HIGH, PHASE_LOW, PHASE_FLOATING},
   { PHASE_HIGH, PHASE_LOW, PHASE_FLOATING},
@@ -49,4 +51,25 @@ constexpr PhaseState commutation_pattern[COMMUTATION_STEP_COUNT] = {
   { PHASE_HIGH, PHASE_LOW, PHASE_FLOATING},
   { PHASE_HIGH, PHASE_LOW, PHASE_FLOATING},
   { PHASE_HIGH, PHASE_LOW, PHASE_FLOATING},
+};
+
+struct FaultLimits {
+  float over_current_amps;
+  float over_voltage_volts;
+  float under_voltage_volts;
+  float max_temperature;
+};
+
+struct SpeedController {
+  float target_rpm;
+  float target_acceleration;
+  float speed_error;
+};
+
+struct MotorController {
+  MotorState state;
+  CommutationStep commutation_step;
+  SpeedController speed_controller;
+  Direction direction;
+  FaultLimits limitations;
 };

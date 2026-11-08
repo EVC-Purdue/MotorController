@@ -2,4 +2,4 @@
 #include "types.hpp"
 #include <cstdint>
 
-CommutationStep commutation_update(CommutationStep* state, uint8_t hall_code);
+bool update(MotorController *motor_controller, CommutationStep next_commutation_step);

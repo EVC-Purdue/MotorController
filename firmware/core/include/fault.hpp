@@ -1,10 +1,5 @@
 #pragma once
 #include "types.hpp"
 
-struct FaultLimits {
-    float over_current_amps;
-    float over_voltage_volts;
-    float under_voltage_volts;
-};
-
-FaultCode fault_check(const FaultLimits* limits);
+bool init(MotorController *motor_controller, FaultLimits config);
+bool check(const FaultLimits* limits, FaultCode *out);

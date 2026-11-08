@@ -23,7 +23,6 @@ set(MC_WARNING_FLAGS
 
 add_library(mc_core
     firmware/core/src/commutation.cpp
-    firmware/core/src/speed_control.cpp
     firmware/core/src/fault.cpp
     firmware/core/src/motor_controller.cpp
 )
