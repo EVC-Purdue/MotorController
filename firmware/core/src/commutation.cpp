@@ -1,13 +1,19 @@
 #include "commutation.hpp"
+#include "macros.hpp"
+#include "types.hpp"
 
-CommutationPattern commutation_pattern_for_step(CommutationStep step) {
-    (void)step;
-    // TODO
-    return {};
+namespace Commutation {
+
+bool update(MotorController *motor_controller, CommutationStep next_commutation_step) {
+    RETURN_IF_NULL(motor_controller);
+
+    if (motor_controller->state != MOTOR_RUNNING) {
+        return false;
+    }
+    
+    motor_controller->commutation_step = next_commutation_step;
+    
+    return true;
 }
 
-CommutationStep commutation_update(CommutationState* state, uint8_t hall_code) {
-    (void)hall_code;
-    // TODO
-    return state->step;
 }
