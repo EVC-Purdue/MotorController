@@ -17,4 +17,3 @@ CommutationStep hall_to_commutation_map[MAX_NUM_HALL_CODES] = {
 
 uint8_t from_sensors(bool hall1, bool hall2, bool hall3);
 CommutationStep to_commutation(uint8_t hall_code);
-

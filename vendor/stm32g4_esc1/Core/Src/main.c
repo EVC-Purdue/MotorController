@@ -21,6 +21,7 @@
 #include "adc.h"
 #include "fdcan.h"
 #include "opamp.h"
+#include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -93,6 +94,7 @@ int main(void)
   MX_FDCAN1_Init();
   MX_OPAMP1_Init();
   MX_OPAMP2_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
